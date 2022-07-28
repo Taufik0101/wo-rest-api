@@ -3,7 +3,7 @@ package dto
 type CreateProduk struct {
 	Seller			uint32		`json:"seller" form:"seller"`
 	Nama_Produk		string		`json:"nama_produk" form:"nama_produk"`
-	Harga			uint64		`json:"harga" form:"harga"`
+	Harga			string		`json:"harga" form:"harga"`
 	DP				uint16		`json:"dp" form:"dp"`
 	Image			string		`json:"image" form:"image"`
 	Deskripsi		string		`json:"deskripsi" form:"deskripsi"`
@@ -12,7 +12,7 @@ type CreateProduk struct {
 type UpdateProduk struct {
 	Seller			uint32		`json:"seller" form:"seller"`
 	Nama_Produk		string		`json:"nama_produk" form:"nama_produk"`
-	Harga			uint64		`json:"harga" form:"harga"`
+	Harga			string		`json:"harga" form:"harga"`
 	DP				uint16		`json:"dp" form:"dp"`
 	Image			string		`json:"image" form:"image"`
 	Deskripsi		string		`json:"deskripsi" form:"deskripsi"`

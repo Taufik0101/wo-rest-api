@@ -139,7 +139,7 @@ func (s seederConnection) SeedProduk() {
 	Produk := entity.Product{
 		Seller:     2,
 		Nama_Produk: "Silver Wedding Package",
-		Harga:       4000000,
+		Harga:       "4000000",
 		DP:          30,
 		Image:       "altair.jpg",
 		Deskripsi:   "Custom Wedding Package :\n\n- Full Day Documentation 1 Crew for Photo + 1 Crew for Video\n- Full Video 1-2 Hours Duration\n- 25 Edit Photos\n- 1 Minute Cinematic Video for Instagram\n- Free All RAW Files\n- Flashdisk for all raw files photos",
@@ -148,7 +148,7 @@ func (s seederConnection) SeedProduk() {
 	Produk1 := entity.Product{
 		Seller:     4,
 		Nama_Produk: "Gold Wedding Package",
-		Harga:       4000000,
+		Harga:       "4000000",
 		DP:          30,
 		Image:       "altair.jpg",
 		Deskripsi:   "Custom Wedding Package :\n\n- Full Day Documentation 1 Crew for Photo + 1 Crew for Video\n- Full Video 1-2 Hours Duration\n- 25 Edit Photos\n- 1 Minute Cinematic Video for Instagram\n- Free All RAW Files\n- Flashdisk for all raw files photos",

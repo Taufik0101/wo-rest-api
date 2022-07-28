@@ -45,7 +45,7 @@ var (
 	TransaksiService			service.TransaksiService			= service.NewTransaksiService(TransaksiRepository)
 	DetailTransaksiService		service.DetailTransaksiService		= service.NewDetailTransaksiService(DetailTransaksiRepository)
 	PenilaianService			service.PenilaianService			= service.NewPenilaianService(PenilaianRepository)
-	AuthControl					data.AuthController					= data.NewAuthController(AuthService,JwtService,RedisService)
+	AuthControl					data.AuthController					= data.NewAuthController(AuthService,JwtService,RedisService, UserService)
 	KategoriControl				data.KategoriController				= data.NewKategoriController(JwtService, KategoriService)
 	KotaControl					data.KotaController					= data.NewKotaController(JwtService, KotaService)
 	VendorControl				data.VendorController				= data.NewVendorController(UserService, JwtService)
@@ -79,6 +79,8 @@ func main()  {
 	{
 		Auth.POST("/login", AuthControl.Login)
 		Auth.POST("/register", AuthControl.Register)
+		Auth.POST("/forget", AuthControl.SendTokenForgot)
+		Auth.POST("/reset", AuthControl.ResetPassword)
 		Auth.POST("/logout", middleware.Auth(JwtService, UserService, RedisService), AuthControl.Logout)
 	}
 

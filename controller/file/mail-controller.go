@@ -35,6 +35,19 @@ func ParseTemplateTolak(templateFileName string) (string, error) {
 	return buf.String(), nil
 }
 
+func ParseTemplateForgot(templateFileName string, data interface{}) (string, error) {
+	t, err := template.ParseFiles(templateFileName)
+	if err != nil {
+		return "", err
+	}
+	buf := new(bytes.Buffer)
+	if err = t.Execute(buf, data); err != nil {
+		fmt.Println(err)
+		return "", err
+	}
+	return buf.String(), nil
+}
+
 func SendEmail(to string, subject string, data dto.Email, templateFile string) error {
 	result, _ := ParseTemplate(templateFile, data)
 	m := gomail.NewMessage()
@@ -73,6 +86,25 @@ func CreateEmailTolak(to string, subject string, templateFile string) error {
 	return err
 }
 
+func CreateEmailForgot(to string, subject string, data dto.Forgot, templateFile string) error {
+	result, _ := ParseTemplateForgot(templateFile, data)
+	m := gomail.NewMessage()
+	m.SetHeader("From", os.Getenv("SMTP_USER"))
+	m.SetHeader("To", to)
+	// m.SetAddressHeader("Cc", "<RECIPIENT CC>", "<RECIPIENT CC NAME>")
+	m.SetHeader("Subject", subject)
+	//m.SetBody("text/html", "Email <b>"+to+"</b> and Password <i>"+data.Password+"</i>!")
+	m.SetBody("text/html", result)
+	//m.Attach(templateFile) // attach whatever you want
+	senderPort := 587
+	d := gomail.NewDialer(os.Getenv("SMTP_HOST"), senderPort, os.Getenv("SMTP_USER"), os.Getenv("SMTP_PASSWORD"))
+	err := d.DialAndSend(m)
+	if err != nil {
+		panic(err)
+	}
+	return err
+}
+
 func SendEmailVerification(to string, data dto.Email) {
 	var err error
 	template := "./email/Account.html"
@@ -90,6 +122,18 @@ func SendEmailTolak(to string)  {
 	template := "./email/tolak.html"
 	subject := "noreply"
 	err = CreateEmailTolak(to, subject, template)
+	if err == nil {
+		fmt.Println("send email '" + subject + "' success")
+	} else {
+		fmt.Println(err)
+	}
+}
+
+func SendEmailForgot(to string, data dto.Forgot)  {
+	var err error
+	template := "./email/token.html"
+	subject := "noreply"
+	err = CreateEmailForgot(to, subject, data, template)
 	if err == nil {
 		fmt.Println("send email '" + subject + "' success")
 	} else {

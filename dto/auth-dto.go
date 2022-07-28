@@ -19,3 +19,7 @@ type UPassword struct {
 	OPassword  	string 	`json:"opassword" form:"opassword" binding:"required"`
 	NPassword  	string 	`json:"npassword" form:"npassword" binding:"required"`
 }
+
+type Forgot struct {
+	URL			string	`json:"url" form:"url" binding:"required"`
+}

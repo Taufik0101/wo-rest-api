@@ -24,6 +24,8 @@ type User struct {
 	Rating		uint16	`gorm:"default:null" json:"rating" form:"rating"`					//vendor
 	Password  	string 	`gorm:"->;<-;not null" json:"-"`
 	Token     	string 	`gorm:"-" json:"token"`
+	ForgotToken	string	`gorm:"default:null" json:"forgot_token" form:"forgot_token"`
+	ExpiretAt	time.Time	`gorm:"default:null" json:"expiret_at" form:"expired_at"`
 	CreatedAt 	time.Time
 	UpdatedAt 	time.Time
 	DeletedAt 	gorm.DeletedAt `gorm:"default:null;" json:"deleted_at" form:"deleted_at"`

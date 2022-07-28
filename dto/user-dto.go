@@ -1,5 +1,7 @@
 package dto
 
+import "time"
+
 type Update struct {
 	Name  		string 	`json:"name,omitempty" form:"name"`
 	Password  	string 	`json:"password" form:"password"`
@@ -16,6 +18,8 @@ type Update struct {
 	Rekening1	uint64	`json:"rekening_1" form:"rekening_1"`	//vendor
 	Bank2		string	`json:"bank_2" form:"bank_2"`			//vendor
 	Rekening2	uint64	`json:"rekening_2" form:"rekening_2"`	//vendor
+	ForgotToken	string	`gorm:"default:null" json:"forgot_token" form:"forgot_token"`
+	ExpiretAt	time.Time	`gorm:"default:null" json:"expiret_at" form:"expired_at"`
 }
 
 type CreateUser struct {
